@@ -20,7 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
+      - name: Install dependencies and test
+        run: |
+          make install
+          make test
+      - name: lint
+        run: make lint
       - name: Hexlet project check
         uses: hexlet/project-action@release
         with:
