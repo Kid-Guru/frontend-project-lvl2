@@ -4,13 +4,13 @@ install:
 gendiff:
 	node src/gendiff.js
 
-lint:
-	npx eslint .
-
-lint-fix:
-	npx eslint . --fix
-
 publish: 
 	npm publish --dry-run
+
+rebuild: 
+	npm unlink
+	npm publish --dry-run
+	clear
+	npm link
 
 .PHONY: test
