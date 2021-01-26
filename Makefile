@@ -1,8 +1,8 @@
 install:
 	npm install
 
-gendiff:
-	node src/gendiff.js
+lint:
+	npx eslint .
 
 publish: 
 	npm publish --dry-run
