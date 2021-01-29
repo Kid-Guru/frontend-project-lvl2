@@ -4,8 +4,11 @@ install:
 lint:
 	npx eslint .
 
+lintfix:
+	npm eslint . --fix
+
 localtest:
-	npx -n --experimental-vm-modules jest --watch
+	npx --experimental-vm-modules jest --watch
 
 test:
 	npm test
