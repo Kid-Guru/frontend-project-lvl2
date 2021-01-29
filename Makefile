@@ -5,7 +5,7 @@ lint:
 	npx eslint .
 
 localtest:
-  npx -n --experimental-vm-modules jest --watch
+	npx -n --experimental-vm-modules jest --watch
 
 test:
 	npm test
