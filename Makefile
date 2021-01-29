@@ -8,7 +8,7 @@ lintfix:
 	npm eslint . --fix
 
 localtest:
-	npx --experimental-vm-modules jest --watch
+	npx jest --watch
 
 test:
 	npm test
