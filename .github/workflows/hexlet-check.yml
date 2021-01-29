@@ -31,10 +31,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       
-      - name: Install dependencies and test
-        run: |
-          make install
-          make test
+      - name: Install dependencies
+        run: make install
+        env:
+          CI: true
           
       - name: lint
         run: make lint

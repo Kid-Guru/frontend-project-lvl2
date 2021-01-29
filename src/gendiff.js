@@ -1,4 +1,3 @@
-import { program } from 'commander';
 import path from 'path';
 import fs from 'fs';
 
@@ -19,6 +18,8 @@ const cheackKey = (key, obj1, obj2, diff) => {
     diffBuffer += `\n  + ${key}: ${obj2[key]}`;
   } else if (obj1[key] !== obj2[key]) {
     diffBuffer += `\n  - ${key}: ${obj1[key]}\n  + ${key}: ${obj2[key]}`;
+  } else {
+    diffBuffer += `\n    ${key}: ${obj1[key]}`;
   }
   return diffBuffer;
 };
@@ -32,21 +33,8 @@ const makeDiff = (obj1, obj2) => {
   return diff;
 };
 
-export default () => {
-  let diff = '';
-  program.version('0.0.1');
-  program
-    .name('gendiff')
-    .usage('[options] <filepath1> <filepath2>')
-    .arguments('<filepath1> <filepath2>')
-    .description('Compares two configuration files and shows a difference.')
-    .option('-f, --format [type]', 'output format')
-    .action((filepath1, filepath2) => {
-      const obj1 = readJSON(filepath1);
-      const obj2 = readJSON(filepath2);
-      diff = makeDiff(obj1, obj2);
-    });
-
-  program.parse(process.argv);
-  return diff;
+export default (filepath1, filepath2) => {
+  const obj1 = readJSON(filepath1);
+  const obj2 = readJSON(filepath2);
+  return makeDiff(obj1, obj2);
 };
