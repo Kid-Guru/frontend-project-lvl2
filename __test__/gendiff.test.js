@@ -8,18 +8,26 @@ const getPath = (filename) => {
   const __dirname = dirname(__filename);
   return path.join(__dirname, '..', '__fixtures__', filename);
 };
-const readFile = (filename) => fs.readFileSync(getPath(filename), 'utf8');
+const readFile = (filename) => fs.readFileSync(getPath(filename), 'utf-8');
 
-let path1;
-let path2;
+let beforeJSON;
+let afterJSON;
 let expectedString;
+let beforeYAML;
+let afterYAML;
 
 beforeAll(() => {
-  path1 = getPath('file1.json');
-  path2 = getPath('file2.json');
+  beforeJSON = getPath('before.json');
+  afterJSON = getPath('after.json');
   expectedString = readFile('expected_file.txt');
+  beforeYAML = getPath('before.yaml');
+  afterYAML = getPath('after.yaml');
 });
 
-test('Comparing flat files', () => {
-  expect(gendiff(path1, path2)).toEqual(expectedString);
+test('Comparing flat json files', () => {
+  expect(gendiff(beforeJSON, afterJSON)).toEqual(expectedString);
+});
+
+test('Comparing flat yaml files', () => {
+  expect(gendiff(beforeYAML, afterYAML)).toEqual(expectedString);
 });
