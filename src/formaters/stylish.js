@@ -27,7 +27,9 @@ const renderValue = (item, depth) => {
 
 const stylish = (ast) => {
   const iterAst = (tree) => tree.map((node) => {
-    const { name, status, depth, valueOld, value, children } = node;
+    const {
+      name, status, depth, valueOld, value, children,
+    } = node;
     const renderNode = () => {
       const indent = getIndent(status, depth);
       const nodeByNodeStatus = {
