@@ -1,7 +1,6 @@
-import _ from 'lodash';
+import isArray from 'lodash/isArray.js';
+import isObject from 'lodash/isObject.js';
 
-// const stringify = (str) => (typeof str === 'string' ? str.replace(/(^")|("$)/g, '') : str);
-const stringify = (str) => str.replace(/"/g, '').replace(/,/g, '');
 const getIndent = (nodeType, depth) => {
   const defaultIndent = ' '.repeat(4 * depth);
   const nestedIndent = ' '.repeat(depth === 1 ? 2 : 3 * depth + depth - 2);
@@ -10,19 +9,16 @@ const getIndent = (nodeType, depth) => {
 const renderValue = (item, depth) => {
   const indent = ' '.repeat(4 * (depth + 1));
   const bracketsIndent = ' '.repeat(4 * depth);
-  if (_.isArray(item)) {
+  if (isArray(item)) {
     const processedArray = item.map((el) => `${indent}${el}`).join('\n');
     return `[\n${processedArray}\n${bracketsIndent}]`;
   }
-  if (_.isObject(item)) {
-    const renderObj = ([key, value]) => `${indent}${key}: ${_.isObject(value) ? renderValue(value, depth + 1) : value}`;
+  if (isObject(item)) {
+    const renderObj = ([key, value]) => `${indent}${key}: ${isObject(value) ? renderValue(value, depth + 1) : value}`;
     const processedColl = Object.entries(item).map(renderObj).join('\n');
-    // const processedColl = Object.entries(item).map(([key, value]) => {
-    //   return `${indent}${key}: ${stringify(JSON.stringify(value, null, indent.repeat(2)))}`
-    // }).join('\n');
     return `{\n${processedColl}\n${bracketsIndent}}`;
   }
-  return stringify(JSON.stringify(item));
+  return item;
 };
 
 const stylish = (ast) => {
