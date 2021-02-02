@@ -8,4 +8,4 @@ export default (formater) => {
     default:
       return stylish;
   }
-}
+};

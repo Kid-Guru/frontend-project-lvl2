@@ -20,7 +20,7 @@ publish:
 	npm publish --dry-run
 
 rebuild: 
-	npm unlink
+	npm unlink gendiff
 	npm publish --dry-run
 	clear
 	npm link
