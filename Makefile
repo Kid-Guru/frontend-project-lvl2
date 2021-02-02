@@ -5,7 +5,7 @@ lint:
 	npx eslint .
 
 lintfix:
-	npm eslint . --fix
+	npx eslint . --fix
 
 localtest:
 	npx jest --watch
