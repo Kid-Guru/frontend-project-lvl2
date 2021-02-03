@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import { program } from 'commander';
+import program from 'commander';
 import gendiff from '../src/gendiff.js';
 
-program.version('0.0.1');
+program.version('1.0.0');
 program
   .name('gendiff')
   .usage('[options] <filepath1> <filepath2>')
