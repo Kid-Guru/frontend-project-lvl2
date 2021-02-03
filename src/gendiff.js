@@ -8,6 +8,13 @@ const readFIle = (filePath) => {
   const extnamepath = path.extname(filePath).replace('.', '');
   const parser = getParser(extnamepath);
   const pathToFile = path.resolve(filePath);
+  try {
+    if (!fs.existsSync(filePath) || !fs.existsSync(filePath)) {
+      throw new Error(`Path error:  ${filePath}`);
+    }
+  } catch (e) {
+    console.log(e.message);
+  }
   const fileDiscriptor = fs.openSync(pathToFile, 'r');
   return parser(fs.readFileSync(fileDiscriptor, 'utf8'));
 };
