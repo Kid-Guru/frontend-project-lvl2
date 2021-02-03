@@ -12,32 +12,30 @@ const readFile = (filename) => fs.readFileSync(getPath(filename), 'utf-8');
 
 let beforeJSON;
 let afterJSON;
-let expectedString;
 let beforeYAML;
 let afterYAML;
-let notFlatbeforeJSON;
-let notFlatafterJSON;
-let notFlatExpectedString;
+let expectedStylish;
+let expectedJSON;
+let expectedPlain;
 
 beforeAll(() => {
   beforeJSON = getPath('before.json');
   afterJSON = getPath('after.json');
-  expectedString = readFile('expected_file.txt');
   beforeYAML = getPath('before.yaml');
   afterYAML = getPath('after.yaml');
-  notFlatbeforeJSON = getPath('notFlatBefore.json');
-  notFlatafterJSON = getPath('notFlatAfter.json');
-  notFlatExpectedString = readFile('notFlatExpected_file.txt');
+  expectedStylish = readFile('expected_Stylish.txt');
+  expectedJSON = readFile('expected_JSON.txt');
+  expectedPlain = readFile('expected_Plain.txt');
 });
-
-test('Comparing flat json files', () => {
-  expect(gendiff(beforeJSON, afterJSON)).toEqual(expectedString);
+test('Input JSON. Stylish output', () => {
+  expect(gendiff(beforeJSON, afterJSON)).toEqual(expectedStylish);
 });
-
-test('Comparing flat yaml files', () => {
-  expect(gendiff(beforeYAML, afterYAML)).toEqual(expectedString);
+test('Input YAML. Stylish output', () => {
+  expect(gendiff(beforeYAML, afterYAML)).toEqual(expectedStylish);
 });
-
-test('Comparing notFlat json files', () => {
-  expect(gendiff(notFlatbeforeJSON, notFlatafterJSON)).toEqual(notFlatExpectedString);
+test('Input JSON. JSON output', () => {
+  expect(gendiff(beforeJSON, afterJSON, 'json')).toEqual(expectedJSON);
+});
+test('Input JSON. Plain output', () => {
+  expect(gendiff(beforeJSON, afterJSON, 'plain')).toEqual(expectedPlain);
 });

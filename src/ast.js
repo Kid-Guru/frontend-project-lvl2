@@ -46,12 +46,14 @@ const buildAst = (object1, object2, depth = 1) => {
         valueOld: valueBefore,
         value: valueAfter,
         depth: depthNode,
+        children: false,
       }),
       unchanged: () => ({
         name: key,
         status: 'unchanged',
         value: valueAfter,
         depth: depthNode,
+        children: false,
       }),
     };
     return nodeByStatus[currentNodeStatus]();
