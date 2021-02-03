@@ -10,7 +10,7 @@ const readFIle = (filePath) => {
   const pathToFile = path.resolve(filePath);
   try {
     if (!fs.existsSync(filePath) || !fs.existsSync(filePath)) {
-      throw new Error(`Path error:  ${filePath}`);
+      throw new Error(`Path exist error:  ${filePath}`);
     }
   } catch (e) {
     console.log(e.message);
