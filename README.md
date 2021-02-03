@@ -9,13 +9,13 @@
 ## About The Project
 Difference Calculator - program that determines the difference between two data structures.
 
-#### Supported file formats: JSON, YAML, INI
-#### Supported output: default, plain, json
+#### Supported file formats: JSON, YAML
+#### Supported output: stylish(default), plain, json
 
 ## Getting Started
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/Kid-Guru/frontend-project-lvl2.git
    ```
 2. Install NPM packages
    ```
@@ -38,3 +38,11 @@ Difference Calculator - program that determines the difference between two data 
    -h, --help           display help for command
 ```
 ## Examples
+### JSON input. Stylish (default) output diff
+[![asciicast](https://asciinema.org/a/388917.svg)](https://asciinema.org/a/388917)
+### YAML input. Stylish (default) output diff
+[![asciicast](https://asciinema.org/a/388919.svg)](https://asciinema.org/a/388919)
+### YAML input. Plain output diff
+[![asciicast](https://asciinema.org/a/388920.svg)](https://asciinema.org/a/388920)
+### YAML input. JSON output diff
+[![asciicast](https://asciinema.org/a/388921.svg)](https://asciinema.org/a/388921)
