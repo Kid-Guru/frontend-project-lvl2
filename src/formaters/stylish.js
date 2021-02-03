@@ -1,6 +1,7 @@
 import isArray from 'lodash/isArray.js';
 import isObject from 'lodash/isObject.js';
 
+const isArrayOrObject = (value) => isArray(value) || isObject(value);
 const getIndent = (nodeType, depth) => {
   const defaultIndent = ' '.repeat(4 * depth);
   const nestedIndent = ' '.repeat(depth === 1 ? 2 : 3 * depth + depth - 2);
@@ -10,11 +11,12 @@ const renderValue = (item, depth) => {
   const indent = ' '.repeat(4 * (depth + 1));
   const bracketsIndent = ' '.repeat(4 * depth);
   if (isArray(item)) {
-    const processedArray = item.map((el) => `${indent}${el}`).join('\n');
+    const renderObj = ((el) => `${indent}${isArrayOrObject(el) ? renderValue(el, depth + 1) : el}`);
+    const processedArray = item.map(renderObj).join(',');
     return `[\n${processedArray}\n${bracketsIndent}]`;
   }
   if (isObject(item)) {
-    const renderObj = ([key, value]) => `${indent}${key}: ${isObject(value) ? renderValue(value, depth + 1) : value}`;
+    const renderObj = ([key, value]) => `${indent}${key}: ${isArrayOrObject(value) ? renderValue(value, depth + 1) : value}`;
     const processedColl = Object.entries(item).map(renderObj).join('\n');
     return `{\n${processedColl}\n${bracketsIndent}}`;
   }
