@@ -8,7 +8,7 @@ const isObjectAndNotArray = (value1, value2) => (
 );
 
 const buildAst = (object1, object2, depth = 1) => {
-  const combinedKeys = [...Object.keys(object1), ...Object.keys(object2)].sort();
+  const combinedKeys = [...Object.keys(object1), ...Object.keys(object2)].concat().sort();
   const unicleKeys = Array.from(new Set(combinedKeys));
 
   const buildNode = (key, obj1, obj2) => {
