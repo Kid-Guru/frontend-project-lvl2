@@ -2,13 +2,14 @@ import findKey from 'lodash/findKey.js';
 import isEqual from 'lodash/isEqual.js';
 import isObject from 'lodash/isObject.js';
 import isArray from 'lodash/isArray.js';
+import sortBy from 'lodash/sortBy.js';
 
 const isObjectAndNotArray = (value1, value2) => (
   isObject(value1) && isObject(value2) && !isArray(value1) && !isArray(value2)
 );
 
 const buildAst = (object1, object2, depth = 1) => {
-  const combinedKeys = [...Object.keys(object1), ...Object.keys(object2)].concat().sort();
+  const combinedKeys = sortBy([...Object.keys(object1), ...Object.keys(object2)], [(k) => k]);
   const unicleKeys = Array.from(new Set(combinedKeys));
 
   const buildNode = (key, obj1, obj2) => {
