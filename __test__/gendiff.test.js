@@ -10,32 +10,17 @@ const getPath = (filename) => {
 };
 const readFile = (filename) => fs.readFileSync(getPath(filename), 'utf-8');
 
-let beforeJSON;
-let afterJSON;
-let beforeYAML;
-let afterYAML;
-let expectedStylish;
-let expectedJSON;
-let expectedPlain;
+const extensionsWithFormats = [
+  ['json', 'stylish'], ['json', 'plain'], ['json', 'json'],
+  ['yaml', 'stylish'], ['yaml', 'plain'], ['yaml', 'json'],
+];
 
-beforeAll(() => {
-  beforeJSON = getPath('before.json');
-  afterJSON = getPath('after.json');
-  beforeYAML = getPath('before.yaml');
-  afterYAML = getPath('after.yaml');
-  expectedStylish = readFile('expected_Stylish.txt');
-  expectedJSON = readFile('expected_JSON.txt');
-  expectedPlain = readFile('expected_Plain.txt');
-});
-test('Input JSON. Stylish output', () => {
-  expect(gendiff(beforeJSON, afterJSON)).toEqual(expectedStylish);
-});
-test('Input YAML. Stylish output', () => {
-  expect(gendiff(beforeYAML, afterYAML)).toEqual(expectedStylish);
-});
-test('Input JSON. JSON output', () => {
-  expect(gendiff(beforeJSON, afterJSON, 'json')).toEqual(expectedJSON);
-});
-test('Input JSON. Plain output', () => {
-  expect(gendiff(beforeJSON, afterJSON, 'plain')).toEqual(expectedPlain);
-});
+test.each(extensionsWithFormats)(
+  'Input %s, %s output',
+  (ext, format) => {
+    const fixturesPathBefore = getPath(`before.${ext}`);
+    const fixturesPathAfter = getPath(`after.${ext}`);
+    const diff = gendiff(`${fixturesPathBefore}`, `${fixturesPathAfter}`, format);
+    expect(diff).toMatch(readFile(`expected_${format}.txt`));
+  },
+);
